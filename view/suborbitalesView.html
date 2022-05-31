@@ -1,0 +1,43 @@
+{{>header}}
+
+<div class="mt-5 p-3">
+    <div>
+        <form action="/suborbitales/buscarVuelo" method="post" style="display: flex">
+            <input class="form-control rounded mr-sm-2" type="search" name="buscar" placeholder="Ingrese aquí..." aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+        </form>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Día</th>
+            <th scope="col">Vuelos</th>
+            <th scope="col">Equipos</th>
+            <th scope="col">Duracion</th>
+            <th scope="col">Partida</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#vuelosDevueltos}}
+        <tr>
+            <td>{{dia}}</td>
+            <td>{{vuelos}}</td>
+            <td>{{equipos}}</td>
+            <td>{{duracion}}</td>
+            <td>{{partida}}</td>
+        </tr>
+        {{/vuelosDevueltos}}
+        {{#vuelos}}
+        <tr>
+            <td>{{dia}}</td>
+            <td>{{vuelos}}</td>
+            <td>{{equipos}}</td>
+            <td>{{duracion}}</td>
+            <td>{{partida}}</td>
+        </tr>
+        {{/vuelos}}
+        </tbody>
+    </table>
+</div>
+
+{{>footer}}

@@ -1,0 +1,19 @@
+create table vuelosSuborbitales(
+id int auto_increment,
+dia varchar(100),
+vuelos varchar(100),
+equipos varchar(100),
+duracion varchar(100),
+partida varchar(100),
+primary key(id)
+);
+
+INSERT INTO vuelosSuborbitales (dia, vuelos, equipos, duracion,partida)
+VALUES ("L", "5", "Calandria y Colibri","8hs","3BA,2AK"),
+("M", "5", "Calandria y Colibri","8hs","3BA,2AK"),
+("X", "5", "Calandria y Colibri","8hs","3BA,2AK"),
+("J", "5", "Calandria y Colibri","8hs","3BA,2AK"),
+("V", "5", "Calandria y Colibri","8hs","3BA,2AK"),
+("S", "8", "Calandria y Colibri","8hs","3BA,2AK"),
+("D", "10", "Calandria y Colibri","8hs","3BA,2AK");
+
