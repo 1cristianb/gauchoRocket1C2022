@@ -34,7 +34,11 @@ class SuborbitalesController
     public function buscarVuelo() {
         $busqueda=$_POST['buscar'];
         $vuelos=$this->suborbitalesModel->buscarVuelo($busqueda);
-        $suborbitales=["vuelos"=>$vuelos];
+        if(isset($_SESSION["email"])){
+            $suborbitales = ["sesionOn" =>"inline","sesionOn1"=>"none","vuelos"=>$vuelos];
+        }else{
+            $suborbitales = ["sesion" =>"none","sesionOn1"=>"inline","vuelos"=>$vuelos];
+        }
         $this->printer->generateView('suborbitalesView.html',$suborbitales);
     }
 
