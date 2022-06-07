@@ -19,7 +19,7 @@ class RegistroController
 
         $registro  = $this->registroModel->guardarRegistro($nombre,$apellido,$email,$password);
 
-        $data = ["registro" => $registro];
+        $data = ["registro" => $registro,"sesion" =>"none"];
         $this->printer->generateView('registroView.html',$data);
     }
     public function execute() {

@@ -16,7 +16,7 @@ class LoginController
         $password=$_POST["passwordLogin"];
 
         $login=$this->loginModel->iniciarSesion($email,$password);
-        $data = ["login" => $login];
+        $data = ["login" => $login,"sesion" =>"none"];
 
         $this->printer->generateView('loginView.html',$data);
 
