@@ -23,7 +23,7 @@ class LoginModel
                 exit();
 
             }else{
-                $mensaje=["errores"=>"Contraseña no es incorrecta"];
+                $mensaje=["errores"=>"Contraseña  incorrecta"];
                 return $mensaje;
             }
 
