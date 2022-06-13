@@ -17,3 +17,130 @@ VALUES ("L", "5", "Calandria y Colibri","8hs","3BA,2AK"),
 ("S", "8", "Calandria y Colibri","8hs","3BA,2AK"),
 ("D", "10", "Calandria y Colibri","8hs","3BA,2AK");
 
+create table vuelosSuborbitales(
+id int auto_increment,
+dia varchar(100),
+vuelos varchar(100),
+equipos varchar(100),
+duracion varchar(100),
+partida varchar(100),
+primary key(id)
+);
+
+INSERT INTO vuelosSuborbitales (dia, vuelos, equipos, duracion,partida)
+VALUES ("L", "5", "Calandria y Colibri","8hs","3BA,2AK"),
+("M", "5", "Calandria y Colibri","8hs","3BA,2AK"),
+("X", "5", "Calandria y Colibri","8hs","3BA,2AK"),
+("J", "5", "Calandria y Colibri","8hs","3BA,2AK"),
+("V", "5", "Calandria y Colibri","8hs","3BA,2AK"),
+("S", "8", "Calandria y Colibri","8hs","3BA,2AK"),
+("D", "10", "Calandria y Colibri","8hs","3BA,2AK");
+
+SELECT * from vuelosSuborbitales;
+
+create table grillaVuelos(
+id int auto_increment,
+dia varchar(100),
+horario int,
+origen varchar(100),
+destino varchar(100),
+equipoId int,
+tipoDeViajeId int,
+primary key(id),
+FOREIGN KEY (equipoId) REFERENCES nave(id),
+FOREIGN KEY (tipoDeViajeId) REFERENCES tipoDeViaje(id)
+);
+
+INSERT INTO grillaVuelos (dia, horario, origen,destino, equipoId,tipoDeViajeId)
+VALUES
+("L", 8, "BA","EEI",3,1),
+("L", 8, "AK","Luna",4,2),
+("L", 9, "AK","EEI",6,2),
+("L", 15, "BA","Marte",9,1),
+("L", 20, "Luna","Marte",10,1),
+("L", 20, "Luna","Encedalo",8,2),
+("L", 21, "Marte","EEI",9,1),
+("L", 8, "EEI","Europa",1,3),
+("L", 8, "AK","Ganimedes",2,3),
+("L", 9, "BA","Io",1,3),
+("L", 9, "Ganimedes","Titan",2,3),
+("L", 12, "EEI","Marte",1,3),
+
+("M", 8, "AK",4,2),
+("M", 9, "BA",6,1),
+("M", 9, "BA",9,2),
+("M", 9, "AK",3,2),
+("M", 15, "BA",5,1),
+("M", 18, "AK",8,1),
+("M", 21, "BA",10,2),
+("M", 22, "BA",10,1),
+("M", 8, "BA",1,3),
+("M", 8, "AK",2,3),
+("M", 9, "BA",1,3),
+("M", 9, "AK",2,3),
+("M", 12, "BA",1,3);
+
+create table equipo(
+id int auto_increment,
+modelo varchar(100),
+matricula varchar(100),
+primary key(id)
+);
+create table equipos(
+id int auto_increment,
+modeloId int,
+matricula varchar(100),
+primary key(id),
+FOREIGN KEY (modeloId) REFERENCES nave(id)
+);
+
+create table nave(
+id int auto_increment,
+modelo varchar(100),
+tipo varchar(100),
+capacidad int,
+cabinas varchar(100),
+capacidad_turista int,
+capacidad_ejecutivo int,
+capacidad_primera int,
+pasajeros varchar(100),
+primary key(id)
+);
+create table tipoDeViaje(
+id int auto_increment,
+descripcion varchar(100),
+primary key(id)
+);
+
+SELECT grillavuelos.dia,grillavuelos.horario,
+grillavuelos.origen,grillavuelos.destino,nave.modelo,tipodeviaje.descripcion
+FROM grillavuelos
+inner join nave on grillavuelos.equipoId=nave.id
+inner join tipodeviaje on grillavuelos.tipoDeViajeId=tipodeviaje.id;
+
+
+SELECT A.destino
+	FROM grillavuelos as A where A.origen='BA'
+    and A.destino in ('EEI','Luna')
+    INTERSECT
+    SELECT B.origen
+	FROM grillavuelos B where B.destino='Marte'
+    and B.origen in ('EEI','Luna')
+
+
+
+SELECT grillavuelos.dia,grillavuelos.horario,
+        grillavuelos.origen,grillavuelos.destino,nave.modelo,tipodeviaje.descripcion
+        FROM grillavuelos
+        inner join nave on grillavuelos.equipoId=nave.id
+        inner join tipodeviaje on grillavuelos.tipoDeViajeId=tipodeviaje.id
+      WHERE grillavuelos.destino in
+      ('EEI','Luna') and grillavuelos.origen ='BA'
+      in
+      (SELECT grillavuelos.dia,grillavuelos.horario,
+        grillavuelos.origen,grillavuelos.destino,nave.modelo,tipodeviaje.descripcion
+        FROM grillavuelos  inner join nave on grillavuelos.equipoId=nave.id
+        inner join tipodeviaje on grillavuelos.tipoDeViajeId=tipodeviaje.id
+        where grillavuelos.destino='Marte'
+        and grillavuelos.origen in('EEI','Luna') )
+      ;
